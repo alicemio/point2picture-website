@@ -68,17 +68,54 @@
     });
   });
 
-  /* Email signup (demo — no backend) */
+  /* Email signup via Formspree — emails you on each submission */
   const form = document.querySelector('.updates-form');
   if (form) {
-    form.addEventListener('submit', (e) => {
+    const note = form.querySelector('.updates-note');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const defaultNote = note?.textContent || '';
+    const isConfigured = form.action.includes('formspree.io/f/')
+      && !form.action.includes('REPLACE_WITH_YOUR_FORM_ID');
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
+
       const input = form.querySelector('input[type="email"]');
-      const note = form.querySelector('.updates-note');
-      if (input && note) {
-        note.textContent = "Thanks — we'll be in touch when there's news to share.";
+      if (!input || !note) return;
+
+      if (!isConfigured) {
+        note.textContent = 'Signup is not configured yet. Add your Formspree form ID to index.html.';
+        note.style.color = 'var(--icon-coral)';
+        return;
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Joining…';
+      }
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+
+        if (!response.ok) {
+          throw new Error('Signup failed');
+        }
+
+        note.textContent = "Thanks — you're on the list. We'll be in touch when there's news to share.";
         note.style.color = 'var(--accent-text)';
         input.value = '';
+      } catch {
+        note.textContent = 'Something went wrong. Please try again in a moment.';
+        note.style.color = 'var(--icon-coral)';
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Join the List';
+        }
       }
     });
   }

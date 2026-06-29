@@ -445,7 +445,14 @@
           <p class="cta-lead">
             Get updates on new features and app support.
           </p>
-          <form class="updates-form" id="updates" action="#" method="post" aria-labelledby="cta-heading">
+          <form
+            class="updates-form"
+            id="updates"
+            action="https://formspree.io/f/alice@point2picture.com"
+            method="post"
+            aria-labelledby="cta-heading"
+          >
+            <input type="hidden" name="_subject" value="New Point2Picture signup">
             <div class="updates-row">
               <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required aria-label="Email address">
               <button type="submit" class="btn btn-primary">Join the List</button>
@@ -476,6 +483,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=5" defer></script>
+  <script src="js/main.js?v=6" defer></script>
 </body>
 </html>
