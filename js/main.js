@@ -127,7 +127,6 @@
     const word = tapCard.dataset.speak || 'Puzzle';
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let cachedVoice = null;
-    let isSpeaking = false;
 
     function cacheVoice() {
       const voices = window.speechSynthesis.getVoices();
@@ -153,6 +152,14 @@
     );
     primeObserver.observe(tapCard);
 
+    tapCard.addEventListener(
+      'touchstart',
+      () => {
+        loadVoices();
+      },
+      { passive: true, once: true }
+    );
+
     function playTapAnimation() {
       if (prefersReduced || !tapImage) return;
       tapCard.classList.remove('is-tapped');
@@ -165,49 +172,27 @@
     });
 
     function speakWord() {
-      if (isSpeaking) {
-        window.speechSynthesis.cancel();
-        isSpeaking = false;
-      }
+      window.speechSynthesis.cancel();
 
-      const startSpeaking = () => {
-        const utterance = new SpeechSynthesisUtterance(word);
-        utterance.lang = 'en-US';
-        utterance.rate = 0.92;
-        utterance.pitch = 1.28;
-        if (cachedVoice) utterance.voice = cachedVoice;
+      const utterance = new SpeechSynthesisUtterance(word);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.92;
+      utterance.pitch = 1.28;
+      cacheVoice();
+      if (cachedVoice) utterance.voice = cachedVoice;
 
-        isSpeaking = true;
-        tapCard.classList.add('is-speaking');
-        utterance.onend = () => {
-          isSpeaking = false;
-          tapCard.classList.remove('is-speaking');
-        };
-        utterance.onerror = () => {
-          isSpeaking = false;
-          tapCard.classList.remove('is-speaking');
-        };
+      tapCard.classList.add('is-speaking');
+      utterance.onend = () => tapCard.classList.remove('is-speaking');
+      utterance.onerror = () => tapCard.classList.remove('is-speaking');
 
+      window.speechSynthesis.speak(utterance);
+
+      /* iOS Safari sometimes queues speech until resumed */
+      requestAnimationFrame(() => {
         if (window.speechSynthesis.paused) {
           window.speechSynthesis.resume();
         }
-
-        window.speechSynthesis.speak(utterance);
-      };
-
-      if (cacheVoice()) {
-        startSpeaking();
-        return;
-      }
-
-      window.speechSynthesis.addEventListener(
-        'voiceschanged',
-        () => {
-          cacheVoice();
-          startSpeaking();
-        },
-        { once: true }
-      );
+      });
     }
 
     function handleActivate() {
@@ -216,10 +201,7 @@
       speakWord();
     }
 
-    tapCard.addEventListener('pointerdown', (event) => {
-      if (event.pointerType === 'mouse' && event.button !== 0) return;
-      handleActivate();
-    });
+    tapCard.addEventListener('click', handleActivate);
 
     tapCard.addEventListener('keydown', (event) => {
       if (event.key !== 'Enter' && event.key !== ' ') return;
