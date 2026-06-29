@@ -306,20 +306,42 @@ a:hover {
   margin: 0;
   display: grid;
   grid-template-columns: minmax(0, 500px) minmax(0, 1fr);
+  grid-template-rows: auto auto;
   gap: 32px;
   align-items: center;
   padding-left: max(24px, calc((100vw - var(--max)) / 2 + 24px));
   padding-right: 0;
 }
 
-.hero-content,
-.hero-visual {
+.hero-content {
+  grid-column: 1;
+  grid-row: 1;
+  padding-right: 16px;
   position: relative;
   z-index: 1;
 }
 
-.hero-content {
-  padding-right: 16px;
+.hero-actions {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.hero-visual {
+  grid-column: 2;
+  grid-row: 1 / -1;
+  align-self: center;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .eyebrow {
@@ -363,16 +385,8 @@ a:hover {
   line-height: 1.7;
   color: var(--charcoal-soft);
   max-width: 480px;
-  margin-bottom: 32px;
+  margin-bottom: 0;
   text-wrap: pretty;
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: center;
-  margin-bottom: 24px;
 }
 
 .hero-note {
@@ -380,13 +394,6 @@ a:hover {
   color: var(--stone);
   padding-left: 16px;
   border-left: 3px solid var(--teal-soft);
-}
-
-.hero-visual {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  min-width: 0;
 }
 
 .hero-visual img {
@@ -1347,12 +1354,11 @@ a:hover {
     font-size: 0.9375rem;
     line-height: 1.65;
     max-width: none;
-    margin-bottom: 24px;
+    margin-bottom: 0;
   }
 
   .hero-actions {
     gap: 10px;
-    margin-bottom: 16px;
   }
 
   .hero-actions .btn {
@@ -1436,23 +1442,45 @@ a:hover {
   }
 
   .hero {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     max-width: var(--max);
     margin: 0 auto;
     padding-top: calc(var(--nav-h) + 32px);
     padding-bottom: 64px;
     padding-left: 24px;
     padding-right: 24px;
-    gap: 40px;
+    gap: 32px;
+  }
+
+  .hero-content,
+  .hero-visual,
+  .hero-actions {
+    grid-column: auto;
+    grid-row: auto;
+    width: 100%;
+  }
+
+  .hero-content {
+    order: 1;
+    padding-right: 0;
   }
 
   .hero-visual {
+    order: 2;
     justify-content: center;
-    margin: 0 -24px;
-    width: calc(100% + 48px);
+    margin: 0;
+    overflow: visible;
+  }
+
+  .hero-visual img {
+    width: 97%;
+    max-width: 97%;
+    transform: translateX(2%);
   }
 
   .hero-actions {
+    order: 3;
     flex-direction: column;
     align-items: stretch;
   }
