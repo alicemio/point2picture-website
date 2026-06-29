@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" fill="none" role="img" aria-labelledby="heroTitle heroDesc">
+  <title id="heroTitle">Caregiver and child using Point2Picture together</title>
+  <desc id="heroDesc">Warm illustration of a parent and child at a kitchen table, looking at a tablet with picture communication cards.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="800" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5F0E8"/>
+      <stop offset="1" stop-color="#E8DFD4"/>
+    </linearGradient>
+    <linearGradient id="light" x1="400" y1="0" x2="400" y2="400" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF9F2" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#FFF9F2" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+  </defs>
+  <rect width="800" height="640" fill="url(#bg)"/>
+  <ellipse cx="620" cy="120" rx="180" ry="120" fill="#D4846A" opacity="0.08"/>
+  <ellipse cx="160" cy="520" rx="200" ry="140" fill="#5B8A8A" opacity="0.07"/>
+  <rect x="0" y="480" width="800" height="160" fill="#E2D8CC" opacity="0.5"/>
+  <!-- window -->
+  <rect x="520" y="60" width="200" height="160" rx="8" fill="#FFFDF9" stroke="#D4C9BC" stroke-width="1.5"/>
+  <rect x="536" y="76" width="168" height="128" rx="4" fill="#EAF2F0"/>
+  <path d="M620 76v128M536 140h168" stroke="#C8DED8" stroke-width="1" opacity="0.6"/>
+  <!-- table -->
+  <path d="M80 420h640v24c0 8-6 14-14 14H94c-8 0-14-6-14-14v-24z" fill="#C9BFB2"/>
+  <rect x="60" y="458" width="680" height="12" rx="4" fill="#B8AEA2"/>
+  <!-- caregiver -->
+  <ellipse cx="280" cy="340" rx="72" ry="88" fill="#E8C4A8"/>
+  <path d="M220 310c8-36 44-58 80-52 28 4 52 28 58 58 6 34-8 68-36 88-20 14-48 18-72 10-28-10-48-34-52-62-2-14 0-28 6-42" fill="#5C4A42"/>
+  <ellipse cx="280" cy="268" rx="52" ry="58" fill="#E8C4A8"/>
+  <path d="M248 248c6-18 28-28 48-24 18 4 32 18 36 36" stroke="#5C4A42" stroke-width="8" stroke-linecap="round"/>
+  <path d="M200 380c-8 48 12 88 48 108" stroke="#7BA3B8" stroke-width="28" stroke-linecap="round"/>
+  <path d="M340 360c12 32 8 64-8 92" stroke="#7BA3B8" stroke-width="26" stroke-linecap="round"/>
+  <!-- child -->
+  <ellipse cx="420" cy="370" rx="56" ry="68" fill="#F0D5BC"/>
+  <ellipse cx="420" cy="318" rx="44" ry="48" fill="#F0D5BC"/>
+  <path d="M392 302c4-14 18-22 34-20 14 2 26 12 30 26" stroke="#6B5348" stroke-width="6" stroke-linecap="round"/>
+  <path d="M380 390c4 36 24 58 48 68" stroke="#D4846A" stroke-width="22" stroke-linecap="round"/>
+  <!-- tablet -->
+  <rect x="300" y="388" width="200" height="130" rx="14" fill="#2D2A26"/>
+  <rect x="308" y="396" width="184" height="114" rx="8" fill="#FAF7F2"/>
+  <rect x="320" y="408" width="52" height="52" rx="8" fill="#E8F0ED" stroke="#8FA888" stroke-width="1.5"/>
+  <circle cx="346" cy="428" r="10" fill="#8FA888" opacity="0.5"/>
+  <rect x="382" y="408" width="52" height="52" rx="8" fill="#F5EBE6" stroke="#D4846A" stroke-width="1.5"/>
+  <rect x="400" y="422" width="16" height="20" rx="3" fill="#D4846A" opacity="0.4"/>
+  <rect x="444" y="408" width="52" height="52" rx="8" fill="#EAF2F5" stroke="#7BA3B8" stroke-width="1.5"/>
+  <path d="M462 430v16M454 438h16" stroke="#7BA3B8" stroke-width="2" stroke-linecap="round"/>
+  <rect x="320" y="472" width="160" height="24" rx="6" fill="#5B8A8A" opacity="0.15"/>
+  <rect x="328" y="478" width="72" height="12" rx="4" fill="#5B8A8A" opacity="0.35"/>
+  <!-- mug -->
+  <rect x="520" y="400" width="36" height="44" rx="6" fill="#FFFDF9" stroke="#D4C9BC"/>
+  <path d="M556 416h12a8 8 0 0 1 8 8v12a8 8 0 0 1-8 8h-12" stroke="#D4C9BC" stroke-width="2"/>
+  <!-- plant -->
+  <path d="M680 458v-60" stroke="#8FA888" stroke-width="3"/>
+  <ellipse cx="680" cy="392" rx="28" ry="20" fill="#8FA888" opacity="0.5"/>
+  <ellipse cx="660" cy="408" rx="20" ry="16" fill="#8FA888" opacity="0.4"/>
+  <ellipse cx="700" cy="404" rx="22" ry="18" fill="#8FA888" opacity="0.45"/>
+  <rect x="668" y="458" width="24" height="20" rx="4" fill="#C9BFB2"/>
+  <rect width="800" height="280" fill="url(#light)"/>
+</svg>
