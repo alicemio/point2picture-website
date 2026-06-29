@@ -122,10 +122,36 @@
 
   /* Features demo — tap card speaks word via system voice */
   const tapCard = document.querySelector('.features-tap-card');
-  if (tapCard) {
+  if (tapCard && 'speechSynthesis' in window) {
     const tapImage = tapCard.querySelector('.features-tap-card-image');
     const word = tapCard.dataset.speak || 'Puzzle';
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let cachedVoice = null;
+    let isSpeaking = false;
+
+    function cacheVoice() {
+      const voices = window.speechSynthesis.getVoices();
+      if (!voices.length) return false;
+      cachedVoice = voices.find((voice) => voice.lang.startsWith('en')) || voices[0];
+      return true;
+    }
+
+    function loadVoices() {
+      if (cacheVoice()) return;
+      window.speechSynthesis.addEventListener('voiceschanged', cacheVoice, { once: true });
+    }
+
+    loadVoices();
+
+    const primeObserver = new IntersectionObserver(
+      (entries) => {
+        if (!entries[0]?.isIntersecting) return;
+        loadVoices();
+        primeObserver.disconnect();
+      },
+      { rootMargin: '120px', threshold: 0 }
+    );
+    primeObserver.observe(tapCard);
 
     function playTapAnimation() {
       if (prefersReduced || !tapImage) return;
@@ -138,23 +164,67 @@
       tapCard.classList.remove('is-tapped');
     });
 
-    tapCard.addEventListener('click', () => {
+    function speakWord() {
+      if (isSpeaking) {
+        window.speechSynthesis.cancel();
+        isSpeaking = false;
+      }
+
+      const startSpeaking = () => {
+        const utterance = new SpeechSynthesisUtterance(word);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.92;
+        utterance.pitch = 1.28;
+        if (cachedVoice) utterance.voice = cachedVoice;
+
+        isSpeaking = true;
+        tapCard.classList.add('is-speaking');
+        utterance.onend = () => {
+          isSpeaking = false;
+          tapCard.classList.remove('is-speaking');
+        };
+        utterance.onerror = () => {
+          isSpeaking = false;
+          tapCard.classList.remove('is-speaking');
+        };
+
+        if (window.speechSynthesis.paused) {
+          window.speechSynthesis.resume();
+        }
+
+        window.speechSynthesis.speak(utterance);
+      };
+
+      if (cacheVoice()) {
+        startSpeaking();
+        return;
+      }
+
+      window.speechSynthesis.addEventListener(
+        'voiceschanged',
+        () => {
+          cacheVoice();
+          startSpeaking();
+        },
+        { once: true }
+      );
+    }
+
+    function handleActivate() {
       playTapAnimation();
+      loadVoices();
+      speakWord();
+    }
 
-      if (!('speechSynthesis' in window)) return;
+    tapCard.addEventListener('pointerdown', (event) => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      handleActivate();
+    });
 
-      window.speechSynthesis.cancel();
-
-      const utterance = new SpeechSynthesisUtterance(word);
-      utterance.lang = 'en-US';
-      utterance.rate = 0.92;
-      utterance.pitch = 1.28;
-
-      tapCard.classList.add('is-speaking');
-      utterance.onend = () => tapCard.classList.remove('is-speaking');
-      utterance.onerror = () => tapCard.classList.remove('is-speaking');
-
-      window.speechSynthesis.speak(utterance);
+    tapCard.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      handleActivate();
     });
   }
 })();
