@@ -35,7 +35,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/main.css?v=103">
+  <link rel="stylesheet" href="css/main.css?v=105">
 
   <script type="application/ld+json">
   {
@@ -67,11 +67,13 @@
         "description": "A simple tool for creating personalized photo boards and ABA communication boards for minimally-speaking and non-speaking children.",
         "image": "https://point2picture.com/assets/OG-Image.png",
         "author": { "@id": "https://point2picture.com/#organization" },
+        "downloadUrl": "https://apps.apple.com/us/app/point2picture/id6755315857",
         "offers": {
           "@type": "Offer",
           "price": "0",
           "priceCurrency": "USD",
-          "availability": "https://schema.org/PreOrder"
+          "availability": "https://schema.org/InStock",
+          "url": "https://apps.apple.com/us/app/point2picture/id6755315857"
         }
       },
       {
@@ -192,7 +194,6 @@
           <li><a href="#demo">Demo</a></li>
           <li><a href="#faq">FAQ</a></li>
         </ul>
-        <a href="#updates" class="btn btn-primary btn-sm nav-cta">Sign Up for Updates</a>
       </div>
     </nav>
   </header>
@@ -212,8 +213,10 @@
         <img src="assets/hero-main.png?v=13" alt="Point2Picture communication board app with photo cards for toys, fruit, and everyday objects on a phone" width="2321" height="1370" fetchpriority="high">
       </div>
       <div class="hero-actions fade-up fade-up-4">
-        <a href="#updates" class="btn btn-primary">Sign Up for Updates</a>
-        <a href="#demo" class="btn btn-secondary">Watch Demo</a>
+        <a class="app-store-badge" href="https://apps.apple.com/us/app/point2picture/id6755315857" target="_blank" rel="noopener noreferrer">
+          <img src="assets/app-store-badge.svg" alt="Download on the App Store" width="120" height="40">
+        </a>
+        <a href="#updates" class="btn btn-secondary">Sign Up for Updates</a>
       </div>
     </section>
 
@@ -438,17 +441,23 @@
     <section class="section cta-section" id="download" aria-labelledby="cta-heading">
       <div class="container container--narrow">
         <div class="cta-panel panel-star panel-star--top-left panel-star--bottom-left-sm reveal">
-          <h2 class="cta-heading" id="cta-heading">Stay updated</h2>
+          <h2 class="cta-heading" id="cta-heading">Get the app</h2>
           <p class="cta-lead">
-            Get updates on new features and app support.
+            Point2Picture is free on the App Store for iPhone and iPad.
           </p>
+          <div class="cta-actions">
+            <a class="app-store-badge app-store-badge--lg" href="https://apps.apple.com/us/app/point2picture/id6755315857" target="_blank" rel="noopener noreferrer">
+              <img src="assets/app-store-badge.svg" alt="Download on the App Store" width="144" height="48">
+            </a>
+          </div>
           <form
             class="updates-form"
             id="updates"
             action="https://formspree.io/f/xjgqolvj"
             method="post"
-            aria-labelledby="cta-heading"
+            aria-label="Sign up for updates"
           >
+            <p class="updates-label" id="updates-heading">Stay updated on new features</p>
             <input type="hidden" name="_subject" value="New Point2Picture signup">
             <div class="updates-row">
               <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required aria-label="Email address">
@@ -478,6 +487,7 @@
         <li><a href="privacy.html">Privacy</a></li>
       </ul>
       <p class="footer-copy">&copy; <span id="year"></span> Point2Picture. All rights reserved.</p>
+      <p class="footer-legal">Apple, the Apple logo, App Store, iPhone, and iPad are trademarks of Apple Inc., registered in the U.S. and other countries. App Store is a service mark of Apple Inc.</p>
     </div>
   </footer>
 

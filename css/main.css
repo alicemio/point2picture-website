@@ -295,6 +295,31 @@ a:hover {
   font-size: 1rem;
 }
 
+/* Official Apple App Store badge — do not recolor or restyle the artwork */
+.app-store-badge {
+  display: inline-flex;
+  flex-shrink: 0;
+  line-height: 0;
+  color: inherit;
+  transition: opacity 0.2s;
+}
+
+.app-store-badge:hover,
+.app-store-badge:focus-visible {
+  opacity: 0.88;
+  color: inherit;
+}
+
+.app-store-badge img {
+  display: block;
+  width: auto;
+  height: 40px;
+}
+
+.app-store-badge--lg img {
+  height: 48px;
+}
+
 /* ── Hero ── */
 .hero {
   position: relative;
@@ -330,6 +355,13 @@ a:hover {
   gap: 12px;
   align-items: center;
   margin-bottom: 0;
+}
+
+.hero-actions .btn {
+  height: 40px;
+  padding-top: 0;
+  padding-bottom: 0;
+  box-sizing: border-box;
 }
 
 .hero-visual {
@@ -1252,6 +1284,15 @@ a:hover {
   margin-top: 8px;
 }
 
+.footer-legal {
+  font-size: 0.6875rem;
+  line-height: 1.5;
+  color: var(--on-dark-muted);
+  margin-top: 16px;
+  max-width: 52rem;
+  opacity: 0.85;
+}
+
 /* ── Legal pages ── */
 .legal-page {
   padding: calc(var(--nav-h) + 48px) 0 80px;
@@ -1445,7 +1486,8 @@ a:hover {
   }
 
   .hero-actions .btn {
-    padding: 11px 18px;
+    height: 40px;
+    padding: 0 18px;
     font-size: 0.875rem;
   }
 
@@ -1571,6 +1613,10 @@ a:hover {
   .hero-actions .btn {
     width: 100%;
     justify-content: center;
+  }
+
+  .hero-actions .app-store-badge {
+    align-self: center;
   }
 
   .hero-actions .btn-text {
