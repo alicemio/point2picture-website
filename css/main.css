@@ -9,26 +9,26 @@
 :root {
   --cream: #FFFDF8;
   --warm-white: #FAF7F0;
-  --section-warm: #FAF0DC;
+  --section-warm: #EDE8DA;
   --sand: #EDE8DF;
   --stone: #5E5038;
   --charcoal: #2E3458;
   --charcoal-soft: #4A506E;
   --muted: #4A506E;
-  --teal: #5964C4;
-  --teal-soft: #E8EBF6;
-  --teal-dark: #3A428C;
-  --accent-text: #454FA8;
-  --accent-text-hover: #3A428C;
-  --icon-teal: #454FA8;
+  --teal: #223B3D;
+  --teal-soft: #DCE8E9;
+  --teal-dark: #1A2E30;
+  --accent-text: #223B3D;
+  --accent-text-hover: #1A2E30;
+  --icon-teal: #223B3D;
   --icon-coral: #8E2850;
   --icon-blue: #184A7D;
   --icon-sage: #125A3A;
   --border: #9A8868;
   --on-dark: #FFFCF5;
   --on-dark-muted: rgba(255, 252, 245, 0.78);
-  --btn-primary: #3A428C;
-  --btn-primary-hover: #323B72;
+  --btn-primary: #223B3D;
+  --btn-primary-hover: #1A2E30;
   --on-primary: #FFFFFF;
   --coral: #FF8FAB;
   --coral-soft: #FFE8F0;
@@ -46,8 +46,8 @@
   --image-radius: 12px;
   --display-tracking: -0.045em;
   --display-word-spacing: -0.08em;
-  --shadow-soft: 0 4px 24px rgba(69, 79, 168, 0.08);
-  --shadow-medium: 0 8px 40px rgba(69, 79, 168, 0.1);
+  --shadow-soft: 0 4px 24px rgba(34, 59, 61, 0.1);
+  --shadow-medium: 0 8px 40px rgba(34, 59, 61, 0.12);
   --pink-underline: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' fill='none' preserveAspectRatio='none'%3E%3Cpath d='M4 10 Q100 12.5 196 10' stroke='%23FF8FAB' stroke-width='2.75' stroke-linecap='round'/%3E%3C/svg%3E");
   --pink-underline-bold: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' fill='none' preserveAspectRatio='none'%3E%3Cpath d='M4 10 Q100 12.5 196 10' stroke='%23FF8FAB' stroke-width='3.75' stroke-linecap='round'/%3E%3C/svg%3E");
   --star-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M48.95 3.34 Q50 0 51.05 3.34 L61 35 L94.5 35 Q98 35 95.18 37.07 L68 57 L77.92 87.67 Q79 91 76.17 88.95 L50 70 L23.83 88.95 Q21 91 22.08 87.67 L32 57 L4.82 37.07 Q2 35 5.5 35 L39 35 Z' fill='white'/%3E%3C/svg%3E");
@@ -120,10 +120,7 @@ a:hover {
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(250, 240, 220, 0.35);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--sand);
+  background: var(--cream);
 }
 
 .nav {
@@ -134,10 +131,12 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  position: relative;
 }
 
 .nav-brand {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -170,11 +169,14 @@ a:hover {
 
 .nav-toggle {
   display: none;
+  position: relative;
+  z-index: 2;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
   width: 40px;
   height: 40px;
+  margin-left: auto;
   padding: 8px;
   border: none;
   background: none;
@@ -204,20 +206,27 @@ a:hover {
 }
 
 .nav-menu {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 0;
+  bottom: 0;
   display: flex;
   align-items: center;
-  gap: 32px;
+  justify-content: center;
+  pointer-events: none;
 }
 
 .nav-links {
   display: flex;
   gap: 28px;
   list-style: none;
+  pointer-events: auto;
 }
 
 .nav-links a {
   font-size: 0.9375rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--muted);
   text-decoration: none;
   transition: color 0.2s;
@@ -228,7 +237,13 @@ a:hover {
 }
 
 .nav-cta {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: auto;
   white-space: nowrap;
+  border-radius: 999px;
 }
 
 /* ── Buttons ── */
@@ -324,35 +339,37 @@ a:hover {
 .hero {
   position: relative;
   overflow: visible;
-  padding-top: calc(var(--nav-h) + 48px);
+  padding-top: calc(var(--nav-h) + 28px);
   padding-bottom: 80px;
   max-width: none;
   width: 100%;
   margin: 0;
   display: grid;
   grid-template-columns: minmax(0, 500px) minmax(0, 1fr);
-  grid-template-rows: auto auto;
   gap: 32px;
   align-items: center;
   padding-left: max(24px, calc((100vw - var(--max)) / 2 + 24px));
   padding-right: 0;
 }
 
-.hero-content {
+.hero-copy {
   grid-column: 1;
-  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
   padding-right: 16px;
   position: relative;
   z-index: 1;
 }
 
+.hero-content {
+  position: relative;
+}
+
 .hero-actions {
-  grid-column: 1;
-  grid-row: 2;
-  align-self: start;
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 12px 20px;
   align-items: center;
   margin-bottom: 0;
 }
@@ -364,9 +381,24 @@ a:hover {
   box-sizing: border-box;
 }
 
+.hero-text-link {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--charcoal);
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1.5px;
+  padding: 0 4px;
+  transition: color 0.2s;
+}
+
+.hero-text-link:hover {
+  color: var(--accent-text);
+}
+
 .hero-visual {
   grid-column: 2;
-  grid-row: 1 / -1;
   align-self: center;
   display: flex;
   justify-content: flex-end;
@@ -382,18 +414,18 @@ a:hover {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--accent-text);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .hero-heading {
   font-family: var(--sans);
   font-size: clamp(2rem, 4vw, 3.125rem);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.15;
   letter-spacing: -0.02em;
   text-wrap: pretty;
   color: var(--charcoal);
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .hero-underline {
@@ -416,7 +448,7 @@ a:hover {
   font-size: 1.0625rem;
   line-height: 1.7;
   color: var(--charcoal-soft);
-  max-width: 480px;
+  max-width: 420px;
   margin-bottom: 0;
   text-wrap: pretty;
 }
@@ -843,11 +875,11 @@ a:hover {
 }
 
 .features-tap-card:hover .features-tap-card-image {
-  box-shadow: var(--shadow-medium), 0 0 0 3px rgba(69, 79, 168, 0.15);
+  box-shadow: var(--shadow-medium), 0 0 0 3px rgba(34, 59, 61, 0.15);
 }
 
 .features-tap-card.is-speaking .features-tap-card-image {
-  box-shadow: var(--shadow-soft), 0 0 0 3px rgba(69, 79, 168, 0.25);
+  box-shadow: var(--shadow-soft), 0 0 0 3px rgba(34, 59, 61, 0.25);
 }
 
 .features-tap-card.is-tapped .features-tap-card-image {
@@ -971,7 +1003,7 @@ a:hover {
 
 /* ── Testimonials panel ── */
 .testimonials-panel {
-  background: var(--charcoal);
+  background: var(--teal);
   border-radius: var(--radius-lg);
   padding: 64px;
 }
@@ -1045,7 +1077,7 @@ a:hover {
 
 /* ── Story ── */
 .story-panel {
-  background: var(--warm-white);
+  background: var(--section-warm);
   border: 1px solid var(--sand);
   border-radius: var(--radius-lg);
   padding: 56px 48px;
@@ -1150,7 +1182,7 @@ a:hover {
 
 .cta-panel {
   text-align: center;
-  background: var(--warm-white);
+  background: var(--section-warm);
   border: 1px solid var(--sand);
   border-radius: var(--radius-lg);
   padding: 64px 48px;
@@ -1461,13 +1493,14 @@ a:hover {
     gap: 24px;
   }
 
-  .hero-content {
+  .hero-copy {
     padding-right: 8px;
+    gap: 24px;
   }
 
   .hero-heading {
     font-size: clamp(1.5rem, 2.6vw, 2.25rem);
-    margin-bottom: 18px;
+    margin-bottom: 14px;
   }
 
   .hero-underline {
@@ -1482,7 +1515,7 @@ a:hover {
   }
 
   .hero-actions {
-    gap: 10px;
+    gap: 10px 18px;
   }
 
   .hero-actions .btn {
@@ -1528,16 +1561,19 @@ a:hover {
   .nav-menu {
     display: none;
     position: fixed;
-    top: var(--nav-h);
     left: 0;
     right: 0;
+    top: var(--nav-h);
+    bottom: auto;
     flex-direction: column;
     align-items: stretch;
+    justify-content: flex-start;
     gap: 0;
-    background: rgba(250, 240, 220, 0.35);
+    background: var(--cream);
     border-bottom: 1px solid var(--sand);
     padding: 20px 24px 24px;
     box-shadow: var(--shadow-soft);
+    pointer-events: auto;
   }
 
   .nav-menu.is-open {
@@ -1562,6 +1598,8 @@ a:hover {
   }
 
   .nav-cta {
+    position: static;
+    transform: none;
     width: 100%;
     text-align: center;
   }
@@ -1571,18 +1609,20 @@ a:hover {
     flex-direction: column;
     max-width: var(--max);
     margin: 0 auto;
-    padding-top: calc(var(--nav-h) + 32px);
+    padding-top: calc(var(--nav-h) + 20px);
     padding-bottom: 64px;
     padding-left: 24px;
     padding-right: 24px;
     gap: 32px;
   }
 
+  .hero-copy {
+    display: contents;
+  }
+
   .hero-content,
   .hero-visual,
   .hero-actions {
-    grid-column: auto;
-    grid-row: auto;
     width: 100%;
   }
 
@@ -1619,7 +1659,7 @@ a:hover {
     align-self: center;
   }
 
-  .hero-actions .btn-text {
+  .hero-actions .hero-text-link {
     text-align: center;
   }
 
